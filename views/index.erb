@@ -1,0 +1,59 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Movie Time</title>
+  <meta name="description" content="Movie Info">
+  <meta name="author" content="Joe Jung">
+
+	<!-- [NOTE]
+		Always remember asset pathing. Sinatra looks for assets from the public folder!
+	-->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+	<div id="form-container">
+		<form action="/" method="POST">
+			<label>Search for a movie title: </label>
+			<br />
+			<input type="text" name="title">
+			<br />
+			<input type="submit">
+		</form>
+	</div>
+
+	<div id="content-container">
+		<div id="search-container">
+			<div class="section-title">Search Results</div>
+			<% if @results != nil %>
+			<div id="search-results">
+				<% @results.each do |movie| %>
+				<div class="movie-title"><%= movie["Title"] %></div>
+				<% end %>
+			</div>
+			<% end %>
+		</div>
+
+		<br />
+
+		<div id="favorites-container">
+			<div class="section-title">Favorites</div>
+			<div id="favorites">
+			</div>
+		</div>
+	</div>	<!-- Close content-container -->
+
+
+
+
+  <script src="js/scripts.js"></script>
+</body>
+</html>
