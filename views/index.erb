@@ -68,7 +68,7 @@
 			<div id="favorites-container">
 				<div class="section-title">Favorites</div>
 				<% @favorites.each do |favorite| %>
-				<div class="favorite"><%= favorite.title %></div>
+				<div class="favorite"><%= favorite["title"] %></div>
 				<% end %>
 			</div>
 			<% end %>

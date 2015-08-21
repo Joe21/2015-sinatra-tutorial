@@ -59,20 +59,26 @@ get '/favorites' do
   @show_favorites = true
 
   file = File.read('data.json')
-  data_hash = JSON.parse(file)
+  @favorites = JSON.parse(file)
 
-  p data_hash
-
-  # p "===================="
-  # p data_hash
-  # p data_hash.class
-  # p "===================="
-
+  p "================"
+  p "@favorites is..."
+  p @favorites
+  p @favorites.class
+  p "================"
 
   erb :index
 end
 
 post '/favorites' do
+
+  # OBJECTIVES:
+  # 1) Take our data transmitted via post request and store it into a uniform hash
+  #   a) 
+
+
+
+
   # Our form is not handling ORM so we are returning back strings. Let's create a movie object to normalize
   # our data into a has before saving it into our file storage.
   movie = {}
@@ -83,14 +89,21 @@ post '/favorites' do
   # 1) Read our file used for storing our data
   # 2) Parse it into JSON string
   # 3) Convert it to an array
-  file = JSON.parse(File.read('data.json')).to_a
+  file = JSON.parse(File.read('data.json'))
+
+  p "=============="
+  p "json parse..."
+  p file
+  p "=============="
+
+  file = file.to_a
 
   # Use control flow to act as a basic form of validation to ensure our data is good and won't corrupt our file storage
   unless movie[:title] && movie[:oid]
     return 'Invalid Request'
   else 
 
-    movie = movie.to_json
+    movie
     file << movie
     File.write('data.json',JSON.pretty_generate(file))
     p "============="

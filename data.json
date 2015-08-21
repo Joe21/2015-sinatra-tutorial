@@ -1,4 +1,6 @@
 [
-  "{\"title\":\"Star Wars: Clone Wars\",\"oid\":\"tt0361243\"}",
-  "{\"title\":\"Speed\",\"oid\":\"tt0111257\"}"
+  {
+    "title": "Speed",
+    "oid": "tt0111257"
+  }
 ]
