@@ -49,34 +49,56 @@ post '/' do
   # p "===================================="
 
   @results = response['Search']
+
   erb :index
 end
 
 # Get request to /favorites
 get '/favorites' do
+
   @show_favorites = true
 
   file = File.read('data.json')
   data_hash = JSON.parse(file)
 
+  p data_hash
+
   # p "===================="
   # p data_hash
   # p data_hash.class
   # p "===================="
-  @favorites = []
+
 
   erb :index
 end
 
 post '/favorites' do
-  movie = params[:movie]
+  # Our form is not handling ORM so we are returning back strings. Let's create a movie object to normalize
+  # our data into a has before saving it into our file storage.
+  movie = {}
+  movie[:title] = params[:title]
+  movie[:oid] = params[:imdbID]
 
-  file = JSON.parse(File.read('data.json'))
-  unless movie["Title"] && movie["imdbID"]
+  # Refactored code below breakdown:
+  # 1) Read our file used for storing our data
+  # 2) Parse it into JSON string
+  # 3) Convert it to an array
+  file = JSON.parse(File.read('data.json')).to_a
+
+  # Use control flow to act as a basic form of validation to ensure our data is good and won't corrupt our file storage
+  unless movie[:title] && movie[:oid]
     return 'Invalid Request'
+  else 
+
+    movie = movie.to_json
+    file << movie
+    File.write('data.json',JSON.pretty_generate(file))
+    p "============="
+    p "file written"
+    p "============="
   end
 
-  new_favorite = {name: movie["Title"], oid: movie["imdbID"]}
+
   # new_favorite.to_json
   # file << new_favorite
   # File.open('data.json','w') do |f|
