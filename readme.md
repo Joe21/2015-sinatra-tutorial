@@ -8,6 +8,7 @@ Movie Time is a Sinatra app created to serve as a tutorial for students learning
 * Basic HTML, CSS, and JavaScript (no jQuery)
 
 **Functionality**
+
 REQUEST | URL | DESCRIPTION
 --- | --- | ---
 GET | / | Renders home page with search functionality
