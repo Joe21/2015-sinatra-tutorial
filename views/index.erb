@@ -50,18 +50,30 @@
 							<div>Year of release: <%= movie["Year"] %></div>
 							<div>imdbID: <%= movie["imdbID"] %></div>
 							<div>Type: <%= movie["Type"] %></div>
+							<form action="/favorites" method="POST">
+								<input type="hidden" name="movie" value='<%= movie %>'>
+								<input type="submit" value="Add to Favorites">
+							</form>
+							</br>
 						</div>
 					</div>
 					<% end %>
 				</div>
 				<% end %>
 			</div>
+		
+
+			<% if @show_favorites %> 
+			<div id="favorites-container">
+				<div class="section-title">Favorites</div>
+				<% @favorites.each do |favorite| %>
+				<div class="favorite"><%= favorite.title %></div>
+				<% end %>
+			</div>
+			<% end %>
+
 		</div>	<!-- Close content-container -->
-
 	</div> <!-- Close master-wrapper -->
-
-
-
 
   <script src="js/scripts.js" type="text/javascript"></script>
 </body>

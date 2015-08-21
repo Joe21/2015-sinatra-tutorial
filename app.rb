@@ -6,6 +6,9 @@ require 'json'
 # Get request to root path
 get '/' do
 
+  # Use this as a flag to prevent favorites from rendering unless chosen
+  @show_favorites = false
+
   # Let's use an erb template to handle ruby logic instead of index.html which can only support markdown
   erb :index
 end
@@ -51,18 +54,35 @@ end
 
 # Get request to /favorites
 get '/favorites' do
-  # Response.header['Content-Type'] = 'application/json'
+  @show_favorites = true
+
   file = File.read('data.json')
   data_hash = JSON.parse(file)
+
+  # p "===================="
+  # p data_hash
+  # p data_hash.class
+  # p "===================="
+  @favorites = []
+
+  erb :index
 end
 
 post '/favorites' do
+  movie = params[:movie]
+
   file = JSON.parse(File.read('data.json'))
-  unless params[:name] && params[:oid]
+  unless movie["Title"] && movie["imdbID"]
     return 'Invalid Request'
   end
-  movie = { name: params[:name], oid: params[:oid] }
-  file << movie
-  File.write('data.json',JSON.pretty_generate(file))
-  movie.to_json
+
+  new_favorite = {name: movie["Title"], oid: movie["imdbID"]}
+  # new_favorite.to_json
+  # file << new_favorite
+  # File.open('data.json','w') do |f|
+  #   f.puts JSON.pretty_generate(file)
+  # end
+  # File.write('data.json',JSON.pretty_generate(file))
+
+  erb :index
 end
