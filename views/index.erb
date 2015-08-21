@@ -20,40 +20,49 @@
 
 <body>
 
-	<div id="form-container">
-		<form action="/" method="POST">
-			<label>Search for a movie title: </label>
-			<br />
-			<input type="text" name="title">
-			<br />
-			<input type="submit">
-		</form>
+	<div id="sticky-header">
+		<a href="/">Search</a>
+		<a href="/favorites">Favorites</a>
 	</div>
 
-	<div id="content-container">
-		<div id="search-container">
-			<div class="section-title">Search Results</div>
-			<% if @results != nil %>
-			<div id="search-results">
-				<% @results.each do |movie| %>
-				<div class="movie-title"><%= movie["Title"] %></div>
+	<div id="master-wrapper">
+		<div id="form-container">
+			<form action="/" method="POST">
+				<label>Search for a movie title: </label>
+				<br />
+				<input type="text" name="title">
+				<br />
+				<input type="submit">
+			</form>
+		</div> <!-- close form-container -->
+
+
+		<div id="content-container">
+			<div id="search-container">
+				<div class="section-title">Search Results</div>
+
+				<% if @results != nil %>
+				<div id="search-results">
+					<% @results.each do |movie| %>
+					<div class="movie-container">
+						<div class="movie-title"><%= movie["Title"] %></div>
+						<div class="movie-info">
+							<div>Year of release: <%= movie["Year"] %></div>
+							<div>imdbID: <%= movie["imdbID"] %></div>
+							<div>Type: <%= movie["Type"] %></div>
+						</div>
+					</div>
+					<% end %>
+				</div>
 				<% end %>
 			</div>
-			<% end %>
-		</div>
+		</div>	<!-- Close content-container -->
 
-		<br />
-
-		<div id="favorites-container">
-			<div class="section-title">Favorites</div>
-			<div id="favorites">
-			</div>
-		</div>
-	</div>	<!-- Close content-container -->
+	</div> <!-- Close master-wrapper -->
 
 
 
 
-  <script src="js/scripts.js"></script>
+  <script src="js/scripts.js" type="text/javascript"></script>
 </body>
 </html>

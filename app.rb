@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'httparty'
+require 'json'
 
 
 # Get request to root path
@@ -17,7 +18,7 @@ post '/' do
 
   # [NOTE]: Once the request for the api endcall has been checked, you will notice it does not handle spaces
   # search = "star wars" vs search = "star+wars"
-  # We need to parse our search variable to handle this properly by finding and replacing white spaces with +
+  # We need to parse our search variable to handle this by finding and replacing white spaces with +
   search.gsub!(/\s+/,'+')
 
   # set the request variable as a string for the api call. We can use string concatenation to dynamically input the search value
@@ -27,7 +28,7 @@ post '/' do
   response = HTTParty.get(request)
 
   # Let's verify the data we are receiving back by using puts statements through our shell
-  # It's a good habit to always CONFIRM the type of data you are dealing with and how is it formatted rather than assume it
+  # It's a good habit to always CONFIRM the type of data you are dealing with and how is it formatted, never assume
   # p "response is..."
   # p response
   # p "===================================="
@@ -48,13 +49,11 @@ post '/' do
   erb :index
 end
 
-
-
-
 # Get request to /favorites
 get '/favorites' do
-  Response.header['Content-Type'] = 'application/json'
-  File.read('data.json')
+  # Response.header['Content-Type'] = 'application/json'
+  file = File.read('data.json')
+  data_hash = JSON.parse(file)
 end
 
 post '/favorites' do

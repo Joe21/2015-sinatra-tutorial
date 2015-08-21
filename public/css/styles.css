@@ -1,5 +1,22 @@
 body {
+	margin: 20px 0 0 0;
+	font-family: Arial;
+}
+
+#master-wrapper {
 	padding: 20px;
+}
+
+#sticky-header {
+	width: 100%;
+	height: 30px;
+	position: fixed;
+	top: 0;
+	padding: 5px;
+}
+
+#sticky-header a {
+	color: black;
 }
 
 #form-container {
@@ -26,6 +43,15 @@ body {
 	padding: 10px;
 }
 
+.movie-container:hover {
+	background-color: yellow;
+	cursor: pointer;
+}
+
+.movie-info {
+	display: none;
+}
+
 #favorites-container {
 	border: 1px solid black;
 	background-color: white;
@@ -33,4 +59,5 @@ body {
 
 .section-title {
 	text-align: center;
+	padding: 5px;
 }
