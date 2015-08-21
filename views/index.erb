@@ -3,7 +3,6 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
   <title>Movie Time</title>
   <meta name="description" content="Movie Info">
   <meta name="author" content="Joe Jung">
@@ -25,6 +24,7 @@
 		<a href="/favorites">Favorites</a>
 	</div>
 
+	<% if @show_favorites == false %>
 	<div id="master-wrapper">
 		<div id="form-container">
 			<form action="/" method="POST">
@@ -35,9 +35,10 @@
 				<input type="submit">
 			</form>
 		</div> <!-- close form-container -->
-
+	<% end %>
 
 		<div id="content-container">
+			<% if @show_favorites == false %>
 			<div id="search-container">
 				<div class="section-title">Search Results</div>
 
@@ -61,8 +62,8 @@
 					<% end %>
 				</div>
 				<% end %>
-			</div>
-		
+			</div>	
+			<% end %>
 
 			<% if @show_favorites %> 
 			<div id="favorites-container">

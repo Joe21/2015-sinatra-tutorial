@@ -31,6 +31,7 @@ body {
 #content-container {
 	border: 1px solid black;
 	padding: 20px;
+	margin-top: 30px;
 	background-color: #D4D4D4;
 }
 
@@ -55,6 +56,7 @@ body {
 #favorites-container {
 	border: 1px solid black;
 	background-color: white;
+	padding: 10px;
 }
 
 .section-title {
